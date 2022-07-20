@@ -18,7 +18,13 @@ function App() {
 					);
 				}
 				const { transactions } = await response.json();
-				setTransactionData(transactions);
+				const expenses = transactions.filter(
+					(transaction) => transaction.amount.value < 0
+				);
+				const ascendingExpensesAmount = [...expenses].sort(
+					(a, b) => a.amount.value < b.amount.value
+				);
+				setTransactionData(ascendingExpensesAmount.slice(0, 10));
 				setError(null);
 			} catch (err) {
 				setError(err.message);
