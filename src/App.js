@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 function App() {
-	const [expenses, setExpenses] = useState(null);
+	// TODO: break into separate component
+	const [transactionData, setTransactionData] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
@@ -17,7 +18,7 @@ function App() {
 					);
 				}
 				const { transactions } = await response.json();
-				setExpenses(transactions);
+				setTransactionData(transactions);
 				setError(null);
 			} catch (err) {
 				setError(err.message);
@@ -33,9 +34,9 @@ function App() {
 			<h1>Expenses App</h1>
 			{loading && <pre>Fetching your data...</pre>}
 			{error && <div>{`Problem fetching data - ${error}`}</div>}
-			{expenses &&
+			{transactionData &&
 				!loading &&
-				expenses.map(({ id, date, amount, description }) => (
+				transactionData.map(({ id, date, amount, description }) => (
 					<pre key={id}>
 						{date} {amount.value} {amount.currency_iso} {description}
 					</pre>
