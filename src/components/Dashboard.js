@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function Expenses() {
+function Dashboard() {
 	// TODO: break into separate component
 	const [transactionData, setTransactionData] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -51,4 +51,4 @@ function Expenses() {
 	);
 }
 
-export default Expenses;
+export default Dashboard;
