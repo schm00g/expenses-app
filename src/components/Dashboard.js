@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Table from './Table';
 
 function Dashboard() {
-	// TODO: break into separate component
 	const [transactionData, setTransactionData] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -42,11 +42,13 @@ function Dashboard() {
 			{error && <div>{`Problem fetching data - ${error}`}</div>}
 			{transactionData &&
 				!loading &&
-				transactionData.map(({ id, date, amount, description }) => (
-					<pre key={id}>
-						{date} {amount.value} {amount.currency_iso} {description}
-					</pre>
-				))}
+				<Table data={transactionData}/>
+				// transactionData.map(({ id, date, amount, description }) => (
+				// 	<pre key={id}>
+				// 		{date} {amount.value} {amount.currency_iso} {description}
+				// 	</pre>
+				// ))
+			}
 		</div>
 	);
 }
