@@ -43,11 +43,6 @@ function Dashboard() {
 			{transactionData &&
 				!loading &&
 				<Table data={transactionData}/>
-				// transactionData.map(({ id, date, amount, description }) => (
-				// 	<pre key={id}>
-				// 		{date} {amount.value} {amount.currency_iso} {description}
-				// 	</pre>
-				// ))
 			}
 		</div>
 	);
