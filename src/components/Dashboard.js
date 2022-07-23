@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import ExpensesTable from './ExpensesTable';
 
-function Expenses() {
-	// TODO: break into separate component
+function Dashboard() {
 	const [transactionData, setTransactionData] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -21,8 +21,9 @@ function Expenses() {
 				const expenses = transactions.filter(
 					(transaction) => transaction.amount.value < 0
 				);
-				const ascendingExpensesAmount = [...expenses].sort(
-					(a, b) => a.amount.value < b.amount.value
+				const ascendingExpensesAmount = expenses.sort(
+					(a, b) => Math.abs(a.amount.value) - Math.abs(b.amount.value)
+					
 				);
 				setTransactionData(ascendingExpensesAmount.slice(0, 10));
 				setError(null);
@@ -42,13 +43,10 @@ function Expenses() {
 			{error && <div>{`Problem fetching data - ${error}`}</div>}
 			{transactionData &&
 				!loading &&
-				transactionData.map(({ id, date, amount, description }) => (
-					<pre key={id}>
-						{date} {amount.value} {amount.currency_iso} {description}
-					</pre>
-				))}
+				<ExpensesTable data={transactionData}/>
+			}
 		</div>
 	);
 }
 
-export default Expenses;
+export default Dashboard;

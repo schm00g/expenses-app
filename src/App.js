@@ -1,8 +1,8 @@
 import React from 'react';
-import Expenses from './components/Expenses';
+import Dashboard from './components/Dashboard';
 
 function App() {
-	return <Expenses />;
+	return <Dashboard />;
 }
 
 export default App;
