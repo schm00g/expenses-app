@@ -7,18 +7,18 @@ export default function ExpensesTable({data}) {
         <Table>
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Amount</th>
                     <th>Description</th>
+                    <th>Amount</th>
+                    <th>Date</th>
                     <th>Category</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map(({ id, date, amount, description, category_title }) => (
                     <TableRow key={id}>
-                        <TableData>{date}</TableData>
-                        <TableData>{Math.abs(amount.value)} {amount.currency_iso}</TableData>
                         <TableData>{description}</TableData>
+                        <TableData>{Math.abs(amount.value)} {amount.currency_iso}</TableData>
+                        <TableData>{date}</TableData>
                         <TableData><Tag>{category_title}</Tag></TableData>
                     </TableRow>
                 ))}

@@ -6,7 +6,7 @@ const Table = styled.table`
     text-align: left;
     width: 50%;
     margin: auto;
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       width: 95%;
     }
 `;
@@ -16,7 +16,7 @@ const TableData = styled.td`
 `;
 
 const TableRow = styled.tr`
-&:nth-child(odd) {
+  &:nth-child(odd) {
     background-color: #f4f4f4;
   }
 `;
