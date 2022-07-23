@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import ExpensesTable from './ExpensesTable';
+import ExpensesTable from '../ExpensesTable/index';
+import { Title, Subtitle, Loading } from './styles'
 
-function Dashboard() {
+export function ascendingExpensesAmount(expenses){
+	return expenses.sort(
+		(a, b) => Math.abs(a.amount.value) - Math.abs(b.amount.value)
+	)
+};
+
+export default function Dashboard() {
 	const [transactionData, setTransactionData] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -21,11 +28,8 @@ function Dashboard() {
 				const expenses = transactions.filter(
 					(transaction) => transaction.amount.value < 0
 				);
-				const ascendingExpensesAmount = expenses.sort(
-					(a, b) => Math.abs(a.amount.value) - Math.abs(b.amount.value)
-					
-				);
-				setTransactionData(ascendingExpensesAmount.slice(0, 10));
+				const tenSmallestTransactions = ascendingExpensesAmount(expenses).slice(0, 10);
+				setTransactionData(tenSmallestTransactions);
 				setError(null);
 			} catch (err) {
 				setError(err.message);
@@ -38,8 +42,9 @@ function Dashboard() {
 
 	return (
 		<div>
-			<h1>Expenses App</h1>
-			{loading && <pre>Fetching your data...</pre>}
+			<Title>Expenses App</Title>
+			<Subtitle>Smallest Expenses</Subtitle>
+			{loading && <Loading>Fetching your data...</Loading>}
 			{error && <div>{`Problem fetching data - ${error}`}</div>}
 			{transactionData &&
 				!loading &&
@@ -48,5 +53,3 @@ function Dashboard() {
 		</div>
 	);
 }
-
-export default Dashboard;
